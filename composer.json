@@ -1,0 +1,34 @@
+{
+    "name": "monkeyphp/php-project-skeleton",
+    "description": "Monkeyphp PHP Project Skeleton",
+    "type": "project",
+    "keywords": [
+        "monkeyphp",
+        "php",
+        "docker"
+    ],
+    "authors": [
+        {
+            "name": "David White",
+            "email": "david@monkeyphp.com",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "phpstan/phpstan": "^0.12.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/"
+        }
+    }
+}

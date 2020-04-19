@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    hostname: web
+    build:
+      context: ./../../
+      dockerfile: tools/docker/Dockerfile
+    ports:
+      - 8000:80
+    volumes: # paths are relative to this file
+      - ./../../bin:/var/www/html/php-docker/bin
+      - ./../../config:/var/www/html/php-docker/config
+      - ./../../public:/var/www/html/php-docker/public
+      - ./../../resources:/var/www/html/php-docker/resources
+      - ./../../src:/var/www/html/php-docker/src
+      - ./../../tests:/var/www/html/php-docker/tests
+      - ./../../vendor:/var/www/html/php-docker/vendor
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+
+  # https://hub.docker.com/_/redis?tab=tags
+  # https://github.com/docker-library/redis/issues/111
+  # cd tools/docker
+  # docker-compose exec redis bash
+  redis:
+    hostname: redis
+    image: redis:5.0.8
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - 16379:6379
+    volumes:
+    - ./../../data/redis:/data
