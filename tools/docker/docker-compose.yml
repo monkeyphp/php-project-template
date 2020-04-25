@@ -1,6 +1,8 @@
 version: '3'
 
 services:
+  #
+  #
   web:
     hostname: web
     build:
@@ -18,8 +20,13 @@ services:
       - ./../../vendor:/var/www/html/php-docker/vendor
     depends_on:
       - redis
+      - mysql
     environment:
       REDIS_HOST: redis
+      MYSQL_DB_HOST:     mysql
+      MYSQL_DB_NAME:     ${MYSQL_DATABASE}
+      MYSQL_DB_USERNAME: ${MYSQL_USER}
+      MYSQL_DB_PASSWORD: ${MYSQL_PASSWORD}
 
   # https://hub.docker.com/_/redis?tab=tags
   # https://github.com/docker-library/redis/issues/111
@@ -33,3 +40,21 @@ services:
       - ${REDIS_PORTS_6379_HOST:-16379}:6379
     volumes:
       - ./../../data/redis:/data
+
+  # https://hub.docker.com/_/mysql
+  # docker-compose exec mysql bash
+  mysql:
+    hostname: mysql
+    image: mysql:8.0
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE:      ${MYSQL_DATABASE}
+      MYSQL_USER:          ${MYSQL_USER}
+      MYSQL_PASSWORD:      ${MYSQL_PASSWORD}
+    ports:
+      - ${MYSQL_PORTS_3306_HOST:-13306}:3306
+    volumes:
+      - ./../../data/mysql:/var/lib/mysql
+      - ./files/mysql/initdb.d:/docker-entrypoint-initdb.d

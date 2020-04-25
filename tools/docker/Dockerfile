@@ -14,13 +14,18 @@ LABEL maintainer="David White"
 # RUN apt-get update && apt-get install -y
 
 # Install xdebug
-# https://pecl.php.net/package/xdebug
+# @link https://pecl.php.net/package/xdebug
 RUN pecl install xdebug-2.9.4 && docker-php-ext-enable xdebug
 
-# https://hub.docker.com/_/php
-# https://pecl.php.net/package/redis/5.2.1
 # Install phpredis
+# @link https://hub.docker.com/_/php
+# @link https://pecl.php.net/package/redis/5.2.1
 RUN pecl install redis-5.2.1 && docker-php-ext-enable redis
+
+# Install mysql extension
+# @link https://www.php.net/manual/en/ref.pdo-mysql.php
+RUN docker-php-ext-install pdo_mysql
+# mbstring zip exif pcnt
 
 ENV PHP_PROJECT_TEMPLATE_TITLE 'PHP PROJECT TEMPLATE'
 
