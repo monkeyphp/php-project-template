@@ -7,7 +7,7 @@ services:
       context: ./../../
       dockerfile: tools/docker/Dockerfile
     ports:
-      - 8000:80
+      - ${WEB_PORTS_80_HOST:-8000}:80
     volumes: # paths are relative to this file
       - ./../../bin:/var/www/html/php-docker/bin
       - ./../../config:/var/www/html/php-docker/config
@@ -30,6 +30,6 @@ services:
     image: redis:5.0.8
     command: ["redis-server", "--appendonly", "yes"]
     ports:
-      - 16379:6379
+      - ${REDIS_PORTS_6379_HOST:-16379}:6379
     volumes:
-    - ./../../data/redis:/data
+      - ./../../data/redis:/data
