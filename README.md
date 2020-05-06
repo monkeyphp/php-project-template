@@ -45,7 +45,48 @@ $ composer install --ignore-platform-reqs
 
 ### MySQL
 
+- https://hub.docker.com/_/mysql
+- https://dev.mysql.com/doc/sakila/en/sakila-authors-note.html
+- https://brew.sh
+- https://formulae.brew.sh/formula/mysql-client
 
+#### Install Brew
+
+```bash
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+#### Install Mysql Client
+
+```bash
+$ brew install mysql-client
+```
+
+#### Connect to Mysql (from host)
+
+```bash
+$ mysql -uroot -ppassword --port=13306 -h127.0.0.1
+```
+
+<!--
+echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
+
+Error: The following directories are not writable by your user:
+  /usr/local/lib/pkgconfig
+  /usr/local/share/man
+  /usr/local/share/man/man1
+  /usr/local/share/man/man3
+  /usr/local/share/man/man5
+  /usr/local/share/man/man7
+  
+  You should change the ownership of these directories to your user.
+    sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/man /usr/local/share/man/man1 /usr/local/share/man/man3 /usr/local/share/man/man5 /usr/local/share/man/man7
+  
+  And make sure that your user has write permission.
+    chmod u+w /usr/local/lib/pkgconfig /usr/local/share/man /usr/local/share/man/man1 /usr/local/share/man/man3 /usr/local/share/man/man5 /usr/local/share/man/man7
+-->
+
+#### Connect to Mysql (within the container)
 
 ```bash
 $ cd tools/docker
