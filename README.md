@@ -143,6 +143,10 @@ $ docker-compose rm --force
 
 ## PHP
 
+## Quality Tools
+
+- https://phpqa.io/index.html
+
 ### Psalm
 
 - https://psalm.dev
